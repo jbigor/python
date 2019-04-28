@@ -1,0 +1,37 @@
+router bgp 3000
+no synchronization
+bgp log-neighbor-changes
+network 10.10.10.0 mask 255.255.255.0
+neighbor 172.16.10.2 remote-as 2000
+neighbor 172.16.10.2 description ISP-2
+neighbor 172.16.10.2 weight 150 
+neighbor 172.16.10.2 route-map ISP-2_in in
+neighbor 172.16.10.2 route-map ISP-2_out out
+neighbor 192.168.10.2 remote-as 1000
+neighbor 192.168.10.2 description ISP-1
+neighbor 192.168.10.2 weight 25
+neighbor 192.168.10.2 route-map ISP-1_in in
+neighbor 192.168.10.2 route-map ISP-1_out out
+no auto-summary
+!
+ip as-path access-list 10 permit ^$
+!
+ip prefix-list DEFAULT_IN seq 5 permit 0.0.0.0/0
+!
+!
+10.10.10.0/24
+!
+route-map ISP-1_out permit 10
+match as-path 10
+set community 65200:80
+!
+route-map ISP-2_out permit 10
+match as-path 10
+!
+route-map ISP-1_in permit 10
+match ip address prefix-list DEFAULT_IN
+!
+!
+route-map ISP-2_in permit 10
+match ip address prefix-list DEFAULT_IN
+
