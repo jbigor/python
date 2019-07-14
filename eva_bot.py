@@ -14,10 +14,10 @@ talk("Привет,,,")
 def command():
 	r = sr.Recognizer()
 
-	with sr.Microphone() as source:
+	with sr.Microphone(device_index=0) as source:
 		print("Говорите")
-		r.pause_threshold = 1
-		r.adjust_for_ambient_noise(source, duration=1)
+#		r.pause_threshold = 1
+#		r.adjust_for_ambient_noise(source, duration=1)
 		audio = r.listen(source)
 
 	try:
