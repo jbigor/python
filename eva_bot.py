@@ -24,7 +24,7 @@ def command():
 		zadanie = r.recognize_google(audio, language="ru-RU").lower()
 		print("Вы сказали: " + zadanie)
 	except sr.UnknownValueError:
-		talk(" ")
+		talk(" говорите ")
 		zadanie = command()
 
 	return zadanie
@@ -52,6 +52,20 @@ def makeSomething(zadanie):
 	elif 'сколько тебе лет' in zadanie:
 		talk("я не знаю")
 		sys.exc_info()
+	elif 'java' in zadanie:
+		talk("да Игорь")
+		sys.exc_info()
+	elif 'ева' in zadanie:
+		talk("да Игорь")
+		sys.exc_info()
+	elif 'посмотри курс биткоина' in zadanie:
+		talk("щас проверю")
+		url2 = 'https://yobit.net/ru/trade/BTC/USD'
+		webbrowser.open(url2)
+	elif 'смотри курс биткоина' in zadanie:
+		talk("открываю юбит")
+		url3 = 'https://yobit.net/ru/trade/BTC/USD'
+		webbrowser.open(url3)
 
 
 
